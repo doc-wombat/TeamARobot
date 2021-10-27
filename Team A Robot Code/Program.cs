@@ -20,8 +20,10 @@ namespace fartbutt
 
             while (true)
             {
+                /* print the axis value */
+                Debug.Print("axis:" + gamepad.GetAxis(1));
+                motor.Set(ControlMode.PercentOutput, gamepad.GetAxis(1)); //axis changed from left stick X to left stick Y
                 CTRE.Phoenix.Watchdog.Feed();
-                motor.Set(ControlMode.PercentOutput, gamepad.GetAxis(0));
                 System.Threading.Thread.Sleep(20);
             }
         }
