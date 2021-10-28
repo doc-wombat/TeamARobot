@@ -8,7 +8,7 @@ using CTRE.Phoenix.Controller;
 using CTRE.Phoenix.MotorControl;
 using CTRE.Phoenix.MotorControl.CAN;
 
-namespace fartbutt
+namespace TeamA
 {
     public class Program
     {
