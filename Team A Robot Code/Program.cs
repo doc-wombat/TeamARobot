@@ -12,20 +12,54 @@ namespace TeamA
 {
     public class Program
     {
+        static GameController gamepad = new GameController(UsbHostDevice.GetInstance(0));
+        static TalonSRX leftMotor = new TalonSRX(0);
+        static TalonSRX rightMotor = new TalonSRX(1);
         public static void Main()
         {
-            GameController gamepad = new GameController(UsbHostDevice.GetInstance(0));
-            TalonSRX motor = new TalonSRX(0);
-            motor.ConfigFactoryDefault();
+            leftMotor.ConfigFactoryDefault();
+            rightMotor.ConfigFactoryDefault();
 
             while (true)
             {
-                /* print the axis value */
-                Debug.Print("axis:" + gamepad.GetAxis(1));
-                motor.Set(ControlMode.PercentOutput, gamepad.GetAxis(1)); //axis changed from left stick X to left stick Y
                 CTRE.Phoenix.Watchdog.Feed();
+                drive();
                 System.Threading.Thread.Sleep(20);
             }
+        }
+
+        /* Values within 10% of 0 get ignored (Controller deadzone) */
+        public static void deadzone(double axis)
+        {
+            if ((axis > .1) && (axis < -.1))
+            {
+
+            }
+            else
+            {
+                axis = 0;
+            }
+        }
+
+        /*
+         * y = forward/backward throttle
+         * twist = turn
+         * Checks for deadzone, ignores axis values that are
+         * < 0.1 and > -0.1
+         */
+        public static void drive()
+        {
+            double y = (gamepad.GetAxis(1) * -1);
+            double twist = gamepad.GetAxis(0);
+
+            deadzone(y);
+            deadzone(twist);
+
+            double leftThrot = y + twist;
+            double rightThrot = y - twist;
+
+            leftMotor.Set(ControlMode.PercentOutput, leftThrot);
+            rightMotor.Set(ControlMode.PercentOutput, rightThrot);
         }
     }
 }
