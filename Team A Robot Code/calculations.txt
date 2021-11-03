@@ -1,0 +1,8 @@
+- 110 rpm unstressed  /  1.83333 rps   /  0.00183333 rpms
+- 2 inch radius
+- 12.566 circumference
+- 115 feet per minute / 1.9167 feet per second  
+- robot 1.5 ft long
+- Vel Vortex field: approx 4 ft to park
+- has to move 2ft to partially park, 2.5 (2.3 to clear the pole), _ deg turn, and 
+         
