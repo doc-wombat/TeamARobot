@@ -4,5 +4,7 @@
 - 115 feet per minute / 1.9167 feet per second  
 - robot 1.5 ft long
 - Vel Vortex field: approx 4 ft to park
-- has to move 2ft to partially park, 2.5 (2.3 to clear the pole), _ deg turn, and 
+- has to move 2ft to partially park
+- to fully park, 2.3ft to clear the pole, 5.76 deg turn, and 0.75ft (9 inches) for 3 wheel park 
+- forward for 1.1999 seconds (1200ms), turn right for _ seconds, move forward for 0.39 seconds (390ms)
          
