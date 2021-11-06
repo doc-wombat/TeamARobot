@@ -54,4 +54,7 @@
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.Native" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="calculations.txt" />
+  </ItemGroup>
 </Project>
