@@ -13,13 +13,13 @@ namespace TeamA
     public class Program
     {
         static GameController gamepad = new GameController(UsbHostDevice.GetInstance(0));
-        //static TalonSRX leftMotor = new TalonSRX(0);
-        //static TalonSRX rightMotor = new TalonSRX(1);
+        static TalonSRX leftMotor = new TalonSRX(0);
+        static TalonSRX rightMotor = new TalonSRX(1);
         static TalonSRX bat = new TalonSRX(2);
         public static void Main()
         {
-            //leftMotor.ConfigFactoryDefault();
-            //rightMotor.ConfigFactoryDefault();
+            leftMotor.ConfigFactoryDefault();
+            rightMotor.ConfigFactoryDefault();
             bat.ConfigFactoryDefault();
 
             while (true)
@@ -29,6 +29,10 @@ namespace TeamA
                 if (gamepad.GetButton(1))
                 {
                     swingBat();
+                }
+                if (gamepad.GetButton(2))
+                {
+                    auton();
                 }
                 System.Threading.Thread.Sleep(20);
             }
@@ -64,8 +68,8 @@ namespace TeamA
             double leftThrot = y + twist;
             double rightThrot = y - twist;
 
-            //leftMotor.Set(ControlMode.PercentOutput, leftThrot);
-            //rightMotor.Set(ControlMode.PercentOutput, -rightThrot);
+            leftMotor.Set(ControlMode.PercentOutput, leftThrot);
+            rightMotor.Set(ControlMode.PercentOutput, -rightThrot);
         }
         
         /* Rotates motor exactly 90 degrees by rotating for
@@ -91,6 +95,43 @@ namespace TeamA
                 CTRE.Phoenix.Watchdog.Feed();
             }
             bat.Set(ControlMode.PercentOutput, 0);
+        }
+
+        // Autonomous code
+        public static void auton()
+
+        {
+            long startTime = millis();
+            while((millis() - startTime) < 2000)
+            {
+                // Move forward for 1200 seconds
+                leftMotor.Set(ControlMode.PercentOutput, 1);
+                rightMotor.Set(ControlMode.PercentOutput, -1);
+                CTRE.Phoenix.Watchdog.Feed();
+            }
+            leftMotor.Set(ControlMode.PercentOutput, 0);
+            rightMotor.Set(ControlMode.PercentOutput, 0);
+            startTime = millis();
+            while ((millis() - startTime) < 500)
+            {
+                // Turn right for 500 seconds
+                leftMotor.Set(ControlMode.PercentOutput, 1);
+                rightMotor.Set(ControlMode.PercentOutput, 1);
+                CTRE.Phoenix.Watchdog.Feed();
+            }
+            leftMotor.Set(ControlMode.PercentOutput, 0);
+            rightMotor.Set(ControlMode.PercentOutput, 0);
+            startTime = millis();
+            while ((millis() - startTime) < 390)
+            {
+                // Move forward for 1200 seconds
+                leftMotor.Set(ControlMode.PercentOutput, 1);
+                rightMotor.Set(ControlMode.PercentOutput, -1);
+                CTRE.Phoenix.Watchdog.Feed();
+            }
+            leftMotor.Set(ControlMode.PercentOutput, 0);
+            rightMotor.Set(ControlMode.PercentOutput, 0);
+            startTime = millis();
         }
 
         // Gets current # of milliseconds
