@@ -72,31 +72,29 @@ namespace TeamA
             rightMotor.Set(ControlMode.PercentOutput, -rightThrot);
         }
         
-        /* Rotates motor exactly 90 degrees by rotating for
-         * exactly .25 seconds (1rps) then returns for exactly
-         * .25 seconds
+        /* Spins wheel exactly once (hopefully), pulling 
+         * back spring, then spins back once to release tension.
          * 
-         * Doesn't work very well. Probably will need encoder
          */
         public static void swingBat()
         {
             long startTime = millis();
-            while ((millis() - startTime) < 250) 
+            while ((millis() - startTime) < 588) 
             {
                 bat.Set(ControlMode.PercentOutput, 1);
                 CTRE.Phoenix.Watchdog.Feed();
             }
             bat.Set(ControlMode.PercentOutput, 0);
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(500);
             startTime = millis();
-            while ((millis() - startTime) < 250)
+            while ((millis() - startTime) < 588)
             {
                 bat.Set(ControlMode.PercentOutput, -1);
                 CTRE.Phoenix.Watchdog.Feed();
             }
             bat.Set(ControlMode.PercentOutput, 0);
         }
-
+        
         // Autonomous code
         public static void auton()
 
