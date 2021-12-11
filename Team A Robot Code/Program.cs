@@ -34,12 +34,6 @@ namespace TeamA
                 {
                     auton();
                 }
-                if (gamepad.GetButton(5) || gamepad.GetButton(8))
-                {
-                    leftMotor.Set(ControlMode.PercentOutput, 0);
-                    rightMotor.Set(ControlMode.PercentOutput, 0);
-                    bat.Set(ControlMode.PercentOutput, 0);
-                }
                 System.Threading.Thread.Sleep(20);
             }
         }
@@ -81,7 +75,7 @@ namespace TeamA
         /* Spins wheel exactly once (hopefully), pulling 
          * back spring, then spins back once to release tension.
          * 
-         //*/
+         */
         public static void swingBat()
         {
             long startTime = millis();
@@ -100,6 +94,7 @@ namespace TeamA
             }
             bat.Set(ControlMode.PercentOutput, 0);
         }
+        
         // Autonomous code
         public static void auton()
 
