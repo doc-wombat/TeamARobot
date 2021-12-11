@@ -34,16 +34,13 @@ namespace TeamA
                 {
                     auton();
                 }
-                if (gamepad.GetButton(5))
+                if (gamepad.GetButton(5) || gamepad.GetButton(8))
                 {
                     leftMotor.Set(ControlMode.PercentOutput, 0);
                     rightMotor.Set(ControlMode.PercentOutput, 0);
                     bat.Set(ControlMode.PercentOutput, 0);
                 }
-                if (gamepad.GetButton(8))
-                {
-                    System.Threading.Thread.CurrentThread.Abort();
-                }
+                System.Threading.Thread.Sleep(20);
             }
         }
 
